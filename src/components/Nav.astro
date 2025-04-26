@@ -2,20 +2,44 @@
 import ThemeSwitcher from "./ThemeSwitcher.astro";
 ---
 
-<header class="sticky top-0 z-50 backdrop-blur-md bg-neutral-50/80 dark:bg-neutral-900/80 border-b border-neutral-200 dark:border-neutral-800">
+<header 
+  class="sticky top-0 z-50 backdrop-blur-md bg-light-background/90 dark:bg-dark-background/90 border-b border-neutral-200 dark:border-neutral-800 transition-all duration-500"
+  data-aos="fade-down"
+  data-aos-duration="800"
+  data-aos-delay="100"
+>
     <div class="container mx-auto px-4 py-4 flex items-center justify-between">
-        <div class="">
-            <a href="/" class="flex items-center gap-4 text-xl font-heading font-bold text-primary-600 dark:text-primary-400">
-              <img src="/logoEB.png" alt="Logo de Estefanía Bermúdez" width="48" height="48" />
+        <div class="transition-transform duration-500 hover:scale-105">
+            <a href="/" class="flex items-center gap-4 text-xl font-sans font-bold text-primary-600 dark:text-primary-400">
+              <img 
+                src="/logoEB.png" 
+                alt="Logo de Estefanía Bermúdez" 
+                width="48" 
+                height="48" 
+                class="logo-animation"
+              />
             </a>
         </div>
       
       <nav class="hidden md:flex items-center space-x-6">
-        <a href="#experiencia" class="text-sm font-medium hover:text-primary-600 dark:hover:text-primary-400 transition-colors">Experiencia</a>
-        <a href="#estudios" class="text-sm font-medium hover:text-primary-600 dark:hover:text-primary-400 transition-colors">Estudios</a>
-        <a href="#proyectos" class="text-sm font-medium hover:text-primary-600 dark:hover:text-primary-400 transition-colors">Proyectos</a>
-        <a href="#skills" class="text-sm font-medium hover:text-primary-600 dark:hover:text-primary-400 transition-colors">Skills</a>
-        <a href="/cv-estefania-bermudez.pdf" target="_blank" class="inline-block px-4 py-2 bg-primary-600 hover:bg-primary-700 text-white rounded-lg text-sm font-medium transition-colors">
+        <a href="#experiencia" 
+           class="text-md font-medium relative nav-link hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
+           Experiencia
+           <span class="nav-link-underline"></span>
+        </a>
+        <a href="#estudios" 
+           class="text-md font-medium relative nav-link hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
+           Estudios
+           <span class="nav-link-underline"></span>
+        </a>
+        <a href="#proyectos" 
+           class="text-md font-medium relative nav-link hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
+           Proyectos
+           <span class="nav-link-underline"></span>
+        </a>
+        <a href="/cv-estefania-bermudez.pdf" 
+           target="_blank" 
+           class="inline-block px-4 py-2 bg-primary-600 hover:bg-primary-700 text-white rounded-lg text-md font-medium transition-all duration-300 hover:shadow-md transform hover:-translate-y-1">
           Descargar CV
         </a>
       </nav>
@@ -24,7 +48,11 @@ import ThemeSwitcher from "./ThemeSwitcher.astro";
         <ThemeSwitcher />
         
         <!-- Botón menú móvil -->
-        <button id="mobile-menu-toggle" class="md:hidden p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500">
+        <button 
+          id="mobile-menu-toggle" 
+          class="md:hidden p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 transition-transform active:scale-90"
+          aria-label="Toggle menu"
+        >
           <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
           </svg>
@@ -33,15 +61,135 @@ import ThemeSwitcher from "./ThemeSwitcher.astro";
     </div>
     
     <!-- Menú móvil -->
-    <div id="mobile-menu" class="md:hidden hidden">
+    <div id="mobile-menu" class="md:hidden hidden transition-all duration-300 ease-in-out opacity-0 transform -translate-y-4">
       <div class="px-4 pt-2 pb-4 space-y-3">
         <a href="#experiencia" class="block py-2 px-3 text-base font-medium hover:bg-neutral-100 dark:hover:bg-neutral-800 rounded-lg transition-colors">Experiencia</a>
         <a href="#estudios" class="block py-2 px-3 text-base font-medium hover:bg-neutral-100 dark:hover:bg-neutral-800 rounded-lg transition-colors">Estudios</a>
         <a href="#proyectos" class="block py-2 px-3 text-base font-medium hover:bg-neutral-100 dark:hover:bg-neutral-800 rounded-lg transition-colors">Proyectos</a>
-        <a href="#skills" class="block py-2 px-3 text-base font-medium hover:bg-neutral-100 dark:hover:bg-neutral-800 rounded-lg transition-colors">Skills</a>
-        <a href="/pdfs/mi-cv.pdf" download class="block py-2 px-3 text-base font-medium text-white bg-primary-600 hover:bg-primary-700 rounded-lg transition-colors">
+        <a href="/cv-estefania-bermudez.pdf" download class="block py-2 px-3 text-base font-medium text-white bg-primary-600 hover:bg-primary-700 rounded-lg transition-colors">
           Descargar CV
         </a>
       </div>
     </div>
   </header>
+
+<style>
+  /* Animación para el logo */
+  .logo-animation {
+    animation: logoEntrance 1.2s ease-out;
+  }
+
+  @keyframes logoEntrance {
+    0% {
+      opacity: 0;
+      transform: rotate(-10deg) scale(0.8);
+    }
+    100% {
+      opacity: 1;
+      transform: rotate(0) scale(1);
+    }
+  }
+
+  /* Animación para los enlaces de navegación */
+  .nav-link {
+    opacity: 0;
+    animation: fadeInStagger 0.5s ease-out forwards;
+  }
+
+  .nav-link:nth-child(1) { animation-delay: 300ms; }
+  .nav-link:nth-child(2) { animation-delay: 500ms; }
+  .nav-link:nth-child(3) { animation-delay: 700ms; }
+  .nav-link:nth-child(4) { animation-delay: 900ms; }
+
+  @keyframes fadeInStagger {
+    0% {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Efecto de subrayado en hover */
+  .nav-link-underline {
+    position: absolute;
+    left: 0;
+    bottom: -4px;
+    width: 0;
+    height: 2px;
+    background-color: currentColor;
+    transition: width 0.3s ease;
+  }
+
+  .nav-link:hover .nav-link-underline {
+    width: 100%;
+  }
+
+  /* Transición para el menú móvil */
+  #mobile-menu.is-open {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
+
+<script>
+  // Script para el menú móvil
+  document.addEventListener('astro:page-load', function() {
+    const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+    
+    mobileMenuToggle?.addEventListener('click', () => {
+      mobileMenu?.classList.toggle('hidden');
+      
+      // Añadir con un pequeño retraso para permitir la transición
+      setTimeout(() => {
+        mobileMenu?.classList.toggle('is-open');
+      }, 10);
+    });
+
+    // Cerrar el menú al hacer clic en un enlace
+    const mobileLinks = mobileMenu?.querySelectorAll('a');
+    
+    mobileLinks?.forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu?.classList.remove('is-open');
+        
+        // Ocultar después de que termine la transición
+        setTimeout(() => {
+          mobileMenu?.classList.add('hidden');
+        }, 300);
+      });
+    });
+
+    // Resaltar enlace activo basado en la sección actual
+    const navLinks = document.querySelectorAll('.nav-link');
+    const sections = document.querySelectorAll('section[id]');
+    
+    function highlightActiveLink() {
+      const scrollY = window.scrollY;
+      
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop - 100;
+        const sectionHeight = section.offsetHeight;
+        const sectionId = section.getAttribute('id');
+        
+        if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
+          navLinks.forEach(link => {
+            if (link.getAttribute('href') === `#${sectionId}`) {
+              link.classList.add('text-primary-600', 'dark:text-primary-400');
+            } else {
+              link.classList.remove('text-primary-600', 'dark:text-primary-400');
+            }
+          });
+        }
+      });
+    }
+    
+    window.addEventListener('scroll', highlightActiveLink);
+    
+    // También verificar al cargar la página
+    highlightActiveLink();
+  });
+</script>

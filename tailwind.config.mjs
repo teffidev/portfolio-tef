@@ -7,52 +7,72 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        // Paleta de colores elegante y moderna
+        // Paleta de colores pastel/tierra/nude moderna
         primary: {
-          50: "#f0f9ff",
-          100: "#e0f2fe",
-          200: "#bae6fd",
-          300: "#7dd3fc",
-          400: "#38bdf8",
-          500: "#0ea5e9",
-          600: "#0284c7",
-          700: "#0369a1",
-          800: "#075985",
-          900: "#0c4a6e",
-          950: "#082f49",
+          // Tonos pasteles rosados-terracota para modo light
+          50: "#fdf2f8",
+          100: "#fce7f3",
+          200: "#fbcfe8",
+          300: "#f9a8d4",
+          400: "#f472b6",
+          500: "#ec4899",
+          600: "#db2777",
+          700: "#be185d",
+          800: "#9d174d",
+          900: "#831843",
+          950: "#500724",
         },
         secondary: {
-          50: "#fdf4ff",
-          100: "#fae8ff",
-          200: "#f5d0fe",
-          300: "#f0abfc",
-          400: "#e879f9",
-          500: "#d946ef",
-          600: "#c026d3",
-          700: "#a21caf",
-          800: "#86198f",
-          900: "#701a75",
-          950: "#4a044e",
+          // Tonos tierra/nude suaves
+          50: "#faf5f2",
+          100: "#f5ebe6",
+          200: "#ead8ce",
+          300: "#dbc1b0",
+          400: "#c8a48e",
+          500: "#b58b71",
+          600: "#a47559",
+          700: "#8b614a",
+          800: "#725041",
+          900: "#5e4436",
+          950: "#2e211a",
         },
         neutral: {
-          50: "#fafafa",
-          100: "#f5f5f5",
-          200: "#e5e5e5",
-          300: "#d4d4d4",
-          400: "#a3a3a3",
-          500: "#737373",
-          600: "#525252",
-          700: "#404040",
-          800: "#262626",
-          900: "#171717",
-          950: "#0a0a0a",
+          // Grises cálidos para transiciones
+          50: "#fafaf9",
+          100: "#f5f5f4",
+          200: "#e7e5e4",
+          300: "#d6d3d1",
+          400: "#a8a29e",
+          500: "#78716c",
+          600: "#57534e",
+          700: "#44403c",
+          800: "#292524",
+          900: "#1c1917",
+          950: "#0c0a09",
+        },
+        // Modo oscuro - colores específicos
+        dark: {
+          background: "#2a2521", // Base tierra oscuro cálido
+          surface: "#36302a", // Un poco más claro para cards
+          accent: "#dbc1b0", // Color secundario 300 como acento
+          text: "#e7e5e4", // Texto claro ligeramente cálido
+        },
+        // Modo claro - colores específicos
+        light: {
+          background: "#faf5f2", // Base nude muy claro
+          surface: "#ffffff", // Blanco para tarjetas
+          accent: "#a47559", // Color secundario 600 como acento
+          text: "#292524", // Texto oscuro ligeramente cálido
         },
       },
       fontFamily: {
-        // Fuentes modernas y profesionales (gratuitas)
-        sans: ["Inter var", ...defaultTheme.fontFamily.sans],
+        // Agregamos Montserrat como fuente principal
+        sans: ["Montserrat", ...defaultTheme.fontFamily.sans],
+        // Mantenemos las otras fuentes
         mono: ["Fira Code", ...defaultTheme.fontFamily.mono],
         heading: ["Manrope", ...defaultTheme.fontFamily.sans],
+        // Definimos específicamente Montserrat para poder usarla con class="font-montserrat"
+        montserrat: ["Montserrat", ...defaultTheme.fontFamily.sans],
       },
       animation: {
         "fade-in": "fadeIn 0.5s ease-in-out",

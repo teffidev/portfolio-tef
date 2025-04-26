@@ -15,7 +15,7 @@ const { title, description = "Mi portafolio profesional" } = Astro.props;
 <html lang="en">
 	<head>
 		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" initial-scale=1.0" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>{title}</title>
 		<meta name="description" content={description} />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -46,7 +46,7 @@ const { title, description = "Mi portafolio profesional" } = Astro.props;
 		</script>
 	</head>
 
-	<body class="font-montserrat bg-neutral-50 text-neutral-900 transition-colors duration-300 dark:bg-neutral-900 dark:text-neutral-100">
+	<body class="font-sans bg-light-background text-light-text transition-colors duration-300 dark:bg-dark-background dark:text-dark-text">
 		<div class="flex min-h-screen flex-col">
 			<!-- Header/Navbar -->
 			<Nav />
