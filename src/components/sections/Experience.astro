@@ -1,0 +1,84 @@
+---
+const experiencias = [
+  {
+    cargo: "Front End Developer",
+    empresa: "Medusa Lab AI",
+    periodo: "Julio 2024 - Marzo 2025",
+    descripcion: "Desarrollo de interfaces de usuario con AI y aplicaciones web y móviles utilizando React, Next.js, TypeScript y TailwindCSS. Implementación de arquitecturas escalables y buenas prácticas de código.",
+    tecnologias: ["React", "Next.js", "TypeScript", "TailwindCSS", "Node.js", "GraphQL"],
+    logros: [
+      "Reduje el tiempo de carga inicial de los compañeros en un 40% haciendo el código más eficiente y optimizando recursos.",
+      "Lideré y ejecute el diseño de la aplicación mobile para una empresa de USA, mejorando las métricas de UX en un 75%."
+    ]
+  },
+  {
+    cargo: "Developer Trainee",
+    empresa: "Byte4Bit",
+    periodo: "Marzo 2023 - Julio 2024",
+    descripcion: "Desarrollo de sitios web y aplicaciones frontend para clientes de diversos sectores. Mantenimiento y optimización de aplicaciones existentes. Automatización de pruebas para la aplicación principal.",
+    tecnologias: ["React", "Next.js", "TypScript", "Storybook", "Cypress", "GraphQL"],
+    logros: [
+      "Automaticé el código de la aplicación principal, reduciendo el tiempo de pruebas en un 50%, con un enfoque integral que priorizó la accesibilidad además de la funcionalidad.",
+      "Apoye al equipo con la implementación de nuevas funcionalidades y mejoras en la aplicación principal, mejorando la experiencia del usuario y la satisfacción."
+    ]
+  },
+];
+---
+
+<section id="experiencia" class="py-20 bg-neutral-50 dark:bg-neutral-900/50">
+  <div class="container mx-auto px-4">
+    <div class="text-center max-w-3xl mx-auto mb-16">
+      <h2 class="text-3xl md:text-4xl font-heading font-bold mb-4">Experiencia Profesional</h2>
+      <p class="text-lg text-neutral-600 dark:text-neutral-400">
+        Mi trayectoria profesional en el mundo del desarrollo web.
+      </p>
+    </div>
+    
+    <div class="max-w-4xl mx-auto">
+      <div class="relative border-l-2 border-primary-200 dark:border-primary-800 pl-8 ml-4">
+        {experiencias.map((exp, index) => (
+          <div class={`mb-12 relative animate-fade-in`} style={`animation-delay: ${index * 150}ms`}>
+            <!-- Indicador en la línea de tiempo -->
+            <div class="absolute -left-[41px] -top-1 w-6 h-6 rounded-full border-4 border-primary-100 dark:border-primary-900 bg-primary-500"></div>
+            
+            <!-- Contenido -->
+            <div class="bg-white dark:bg-neutral-800 rounded-lg p-6 shadow-md hover:shadow-lg transition-shadow border border-neutral-200 dark:border-neutral-700">
+              <div class="flex flex-col md:flex-row md:items-center justify-between mb-4">
+                <div>
+                  <h3 class="text-xl font-bold text-neutral-900 dark:text-neutral-100">{exp.cargo}</h3>
+                  <p class="text-primary-600 dark:text-primary-400 font-medium">{exp.empresa}</p>
+                </div>
+                <span class="text-sm text-neutral-500 dark:text-neutral-400 bg-neutral-100 dark:bg-neutral-700 px-3 py-1 rounded-full mt-2 md:mt-0 inline-block">
+                  {exp.periodo}
+                </span>
+              </div>
+              
+              <p class="text-neutral-600 dark:text-neutral-300 mb-4">{exp.descripcion}</p>
+              
+              <!-- Logros -->
+              {exp.logros && exp.logros.length > 0 && (
+                <div class="mb-4">
+                  <h4 class="text-sm font-bold text-neutral-700 dark:text-neutral-300 mb-2">Logros destacados:</h4>
+                  <ul class="list-disc pl-5 space-y-1 text-sm text-neutral-600 dark:text-neutral-400">
+                    {exp.logros.map(logro => (
+                      <li>{logro}</li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+              
+              <!-- Tecnologías -->
+              <div class="flex flex-wrap gap-2 mt-4">
+                {exp.tecnologias.map(tech => (
+                  <span class="px-3 py-1 text-xs font-medium bg-neutral-100 dark:bg-neutral-700 text-neutral-800 dark:text-neutral-200 rounded-full">
+                    {tech}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+<section/>

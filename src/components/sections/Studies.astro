@@ -1,0 +1,60 @@
+---
+// Define tus estudios aquí
+const estudios = [
+  {
+    titulo: "Tecnólogo(a) en Desarrollo de Aplicaciones",
+    institucion: "ITM - Instituto Tecnológico Metropolitano de Medellín",
+    periodo: "2025 - Actualmente",
+    descripcion: "Formación tecnológica que brindará herramientas y competencias fundamentales para la industria del software y como diseñador de software web y multimedia, diseñador y desarrollador de video juegos, diseñador de bases de datos, diseñador y desarrollador de aplicaciones para dispositivos móviles.",
+    logo: "/logo-ITM.png"
+  },
+  {
+    titulo: "Certificación Back End Developer",
+    institucion: "Digital House",
+    periodo: "Julio 2023 - Julio 2024",
+    descripcion: "Certificación especializada en Java, Microservicios con Spring Cloud, Seguridad en Microservicios mediante IAM y Fundamentos de Go, profundizando en manejo de datos incluyendo bases de datos relacionales y no relacionales, Infraestructura avanzada, Testing automatizado, contenidos técnicos complementarios, Soft Skills, Elastic Search y caching, criptografía, ciberseguridad y patrones de diseño orientados al backend.",
+    logo: "/logo-DH.jpeg"
+  },
+  {
+    titulo: "Certificación Professional Developer",
+    institucion: "Digital House",
+    periodo: "Octubre 2021 - Julio 2023",
+    descripcion: "Certificación enfocada en otorgar desde cero conocimiento en lenguajes de programación, metodologías ágiles, testing, diseño UX/UI, donde se experimenta el aprendizaje al mundo TI, diseño web: HTML y CSS, Learning Agile, programación Interactiva con JavaScript, React, POO en Java, Infraestructura (con AWS), Java con Spring Boot, Cloud Computing, Herramientas de trabajo colaborativo, y otros temas relacionados con el desarrollo de software.",
+    logo: "/logo-DH.jpeg"
+  }
+];
+---
+
+<section id="estudios" class="py-20">
+  <div class="container mx-auto px-4">
+    <div class="text-center max-w-3xl mx-auto mb-16">
+      <h2 class="text-3xl md:text-4xl font-heading font-bold mb-4">Formación Académica</h2>
+      <p class="text-lg text-neutral-600 dark:text-neutral-400">
+        Mi preparación académica y certificaciones.
+      </p>
+    </div>
+    
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+      {estudios.map((estudio, index) => (
+        <div class="bg-white dark:bg-neutral-800 rounded-xl p-6 shadow-md hover:shadow-lg transition-all transform hover:-translate-y-1 border border-neutral-200 dark:border-neutral-700 animate-fade-in" style={`animation-delay: ${index * 150}ms`}>
+          <div class="flex flex-col items-start mb-4 gap-4">
+            <div class="w-full h-48 bg-neutral-100 dark:bg-neutral-700 rounded-lg flex items-center justify-center mr-4 overflow-hidden">
+              <!-- Si tienes los logos, reemplaza el SVG por una imagen -->
+              <img src={estudio.logo} alt={estudio.titulo} class="text-primary-500" />
+            </div>
+            <div>
+              <h3 class="text-xl font-bold text-neutral-900 dark:text-neutral-100">{estudio.titulo}</h3>
+              <p class="text-primary-600 dark:text-primary-400">{estudio.institucion}</p>
+            </div>
+          </div>
+          
+          <p class="text-neutral-600 dark:text-neutral-300 mb-4 text-sm">{estudio.descripcion}</p>
+          
+          <div class="bg-neutral-100 dark:bg-neutral-700 rounded-full px-3 py-1 text-xs font-medium text-neutral-800 dark:text-neutral-200 inline-block">
+            {estudio.periodo}
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

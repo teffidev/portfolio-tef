@@ -1,0 +1,94 @@
+---
+import { getSkills } from "../../utils/skills";
+import SkillCard from "../SkillCard.astro";
+
+const skills = getSkills();
+---
+
+<section id="skills" class="py-20">
+  <div class="container mx-auto px-4">
+    <div class="text-center max-w-3xl mx-auto mb-16" data-aos="fade-up">
+      <h2 class="text-3xl md:text-4xl font-heading font-bold mb-4">Mis Habilidades</h2>
+      <p class="text-lg text-neutral-600 dark:text-neutral-400">
+        Tecnologías y herramientas con las que trabajo.
+      </p>
+    </div>
+    
+    <!-- Swiper Container -->
+    <div class="swiper skills-swiper" data-aos="fade-up" data-aos-delay="200">
+      <div class="swiper-wrapper pb-12">
+        {
+          skills.map((skill) => (
+            <div class="swiper-slide p-2">
+              <SkillCard
+                nombre={skill.nombre}
+                logo={skill.logo}
+              />
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Estilos específicos para Swiper -->
+<style is:global>
+</style>
+
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+/>
+<script
+  is:inline
+  src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+<script>
+    declare const Swiper: any;
+  
+    function initializeServicesSwiper() {
+      // Destruir instancia anterior si existe
+      const swiperElement = document.querySelector('.skills-swiper') as any;
+      if (swiperElement?.swiper) {
+        swiperElement.swiper.destroy(true, true);
+      }
+  
+      // Crear nueva instancia
+      new Swiper('.skills-swiper', {
+        slidesPerView: 1,
+        spaceBetween: 30,
+        loop: true,
+        centeredSlides: false,
+        autoplay: {
+          delay: 3500,
+          disableOnInteraction: false,
+        },
+        breakpoints: {
+            320: {
+                slidesPerView: 2,
+                spaceBetween: 20,
+            },
+            640: {
+                slidesPerView: 2,
+                spaceBetween: 20,
+            },
+            1024: {
+                slidesPerView: 6,
+                spaceBetween: 30,
+            },
+            1280: {
+                slidesPerView: 6,
+                spaceBetween: 40,
+            },
+        },
+        effect: 'slide',
+      });
+    }
+  
+    // Inicializar en la carga inicial
+    document.addEventListener('DOMContentLoaded', initializeServicesSwiper);
+  
+    // Inicializar después de las transiciones (para compatibilidad con View Transitions)
+    document.addEventListener('astro:page-load', initializeServicesSwiper);
+</script>

@@ -1,0 +1,22 @@
+---
+interface Props {
+  nombre: string;
+  logo: string;
+}
+
+const { nombre, logo } = Astro.props;
+---
+
+<div class="transition-all flex flex-col items-center justify-center group hover:-translate-y-2 duration-300">
+  <!-- Logo con efecto hover -->
+  <div class="w-16 h-16 mb-4 flex items-center justify-center relative gap-2">
+    <img
+      src={`https://cdn.simpleicons.org/${logo}`}
+      alt={`Logo de ${nombre}`}
+      class="w-12 h-12 object-contain dark:invert dark:opacity-80 group-hover:scale-110 transition-transform duration-300"
+      loading="lazy"
+    />
+    <h3 class="text-lg font-bold text-neutral-900 dark:text-neutral-100 text-center group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">{nombre}</h3>
+  </div>
+  
+</div>

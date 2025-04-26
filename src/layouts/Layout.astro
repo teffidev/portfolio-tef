@@ -1,22 +1,108 @@
+---
+import { ClientRouter } from 'astro:transitions';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+
+interface Props {
+	title: string;
+	description: string;
+}
+
+const { title, description = "Mi portafolio profesional" } = Astro.props;
+---
+
 <!doctype html>
 <html lang="en">
 	<head>
 		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
+		<meta name="viewport" content="width=device-width" initial-scale=1.0" />
+		<title>{title}</title>
+		<meta name="description" content={description} />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
+
+		<!-- Fuentes de Google -->
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+    	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    	<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+		<!-- AOS CSS -->
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" />
+
+		<ClientRouter />
+
+		<!-- Script para el tema oscuro -->
+		<script is:inline>
+			// Esto se ejecuta inmediatamente en el cliente
+			const savedTheme = localStorage.getItem('theme') || 'auto';
+			const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+			
+			// Aplicar tema oscuro si es necesario
+			if (savedTheme === 'dark' || (savedTheme === 'auto' && prefersDark)) {
+			  document.documentElement.classList.add('dark');
+			} else {
+			  document.documentElement.classList.remove('dark');
+			}
+		</script>
 	</head>
-	<body>
-		<slot />
+
+	<body class="font-montserrat bg-neutral-50 text-neutral-900 transition-colors duration-300 dark:bg-neutral-900 dark:text-neutral-100">
+		<div class="flex min-h-screen flex-col">
+			<!-- Header/Navbar -->
+			<Nav />
+			
+			<!-- Contenido principal -->
+			<main class="flex-grow">
+				<slot />
+			</main>
+
+			<!-- Footer -->
+			<Footer />
+		</div>
+	
+		<!-- Script para AOS -->
+		<script is:inline src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+		<script is:inline>
+			// Inicializar AOS
+			document.addEventListener('DOMContentLoaded', function() {
+				AOS.init({
+					duration: 800,
+					easing: 'ease-out',
+					once: false,
+					mirror: true,
+					offset: 100,
+					delay: 0
+				});
+			});
+			
+			// Para compatibilidad con View Transitions de Astro
+			document.addEventListener('astro:page-load', function() {
+				AOS.refresh();
+			});
+			
+			// Para asegurarnos de que AOS se reinicia después de cambiar el tema
+			document.addEventListener('theme-change', function() {
+				setTimeout(() => AOS.refresh(), 300); // Esperar a que termine la transición del tema
+			});
+		</script>
+	
+		<script>
+			// Script para el menú móvil
+			const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+			const mobileMenu = document.getElementById('mobile-menu');
+			
+			mobileMenuToggle?.addEventListener('click', () => {
+				mobileMenu?.classList.toggle('hidden');
+			});
+	
+		  	// Cerrar el menú al hacer clic en un enlace
+			const mobileLinks = mobileMenu?.querySelectorAll('a');
+			
+			mobileLinks?.forEach(link => {
+				link.addEventListener('click', () => {
+					mobileMenu?.classList.add('hidden');
+				});
+			});
+		</script>
 	</body>
 </html>
-
-<style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
-</style>

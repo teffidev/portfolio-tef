@@ -1,0 +1,81 @@
+---
+---
+
+<div id="theme-switcher" class="relative flex items-center">
+  <button
+    aria-label="Toggle Dark Mode"
+    class="flex h-9 w-9 items-center justify-center rounded-lg bg-neutral-200 ring-neutral-400 transition-all hover:ring-2 dark:bg-neutral-700"
+    id="theme-toggle"
+  >
+    <!-- Sun icon for dark mode -->
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      class="h-5 w-5 text-neutral-800 dark:hidden"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"
+      ></path>
+    </svg>
+    <!-- Moon icon for light mode -->
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      class="hidden h-5 w-5 text-neutral-200 dark:block"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
+      ></path>
+    </svg>
+  </button>
+</div>
+
+<script>
+  // Script para manejar el cambio de tema
+  const themeToggle = document.getElementById('theme-toggle');
+  
+  // Función para establecer el tema
+  const setTheme = (theme: 'light' | 'dark') => {
+    document.documentElement.classList.toggle('dark', theme === 'dark');
+    localStorage.setItem('theme', theme);
+  };
+
+  // Detectar preferencia del sistema
+  const detectTheme = (): 'light' | 'dark' => {
+    // Verificar preferencia guardada
+    const savedTheme = localStorage.getItem('theme') as 'light' | 'dark' | null;
+    if (savedTheme) {
+      return savedTheme;
+    }
+    
+    // Si no hay preferencia guardada, usar la del sistema
+    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  };
+
+  // Inicializar tema
+  setTheme(detectTheme());
+
+  // Escuchar cambios en las preferencias del sistema
+  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+    if (!localStorage.getItem('theme')) {
+      setTheme(e.matches ? 'dark' : 'light');
+    }
+  });
+
+  // Escuchar clics en el botón de cambio
+  themeToggle?.addEventListener('click', () => {
+    const currentTheme = document.documentElement.classList.contains('dark') ? 'dark' : 'light';
+    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    setTheme(newTheme);
+  });
+</script>
