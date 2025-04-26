@@ -3,58 +3,138 @@
 const estudios = [
   {
     titulo: "Tecnólogo(a) en Desarrollo de Aplicaciones",
-    institucion: "ITM - Instituto Tecnológico Metropolitano de Medellín",
+    institucion: "ITM - Instituto Tecnológico Metropolitano",
     periodo: "2025 - Actualmente",
-    descripcion: "Formación tecnológica que brindará herramientas y competencias fundamentales para la industria del software y como diseñador de software web y multimedia, diseñador y desarrollador de video juegos, diseñador de bases de datos, diseñador y desarrollador de aplicaciones para dispositivos móviles.",
-    logo: "/logo-ITM.png"
+    descripcion: "Formación tecnológica que brindará herramientas y competencias fundamentales para la industria del software.",
+    logo: "/logo-ITM.png",
+    skills: ["Desarrollo Web", "Diseño Multimedia", "Videojuegos", "Bases de Datos", "Apps Móviles"]
   },
   {
     titulo: "Certificación Back End Developer",
     institucion: "Digital House",
     periodo: "Julio 2023 - Julio 2024",
-    descripcion: "Certificación especializada en Java, Microservicios con Spring Cloud, Seguridad en Microservicios mediante IAM y Fundamentos de Go, profundizando en manejo de datos incluyendo bases de datos relacionales y no relacionales, Infraestructura avanzada, Testing automatizado, contenidos técnicos complementarios, Soft Skills, Elastic Search y caching, criptografía, ciberseguridad y patrones de diseño orientados al backend.",
-    logo: "/logo-DH.jpeg"
+    descripcion: "Certificación especializada y enfocada en el desarrollo Back End, complementada con contenidos técnicos sobre patrones de diseño.",
+    logo: "/logo-DH.png",
+    skills: ["Java", "Spring Cloud", "Microservicios", "Testing", "Ciberseguridad", "AWS", "Fundamentos de Go"]
   },
   {
     titulo: "Certificación Professional Developer",
     institucion: "Digital House",
     periodo: "Octubre 2021 - Julio 2023",
-    descripcion: "Certificación enfocada en otorgar desde cero conocimiento en lenguajes de programación, metodologías ágiles, testing, diseño UX/UI, donde se experimenta el aprendizaje al mundo TI, diseño web: HTML y CSS, Learning Agile, programación Interactiva con JavaScript, React, POO en Java, Infraestructura (con AWS), Java con Spring Boot, Cloud Computing, Herramientas de trabajo colaborativo, y otros temas relacionados con el desarrollo de software.",
-    logo: "/logo-DH.jpeg"
+    descripcion: "Certificación enfocada en otorgar conocimiento en lenguajes de programación y herramientas de desarrollo, donde se experimenta el aprendizaje al mundo TI.",
+    logo: "/logo-DH.png",
+    skills: ["HTML/CSS", "JavaScript", "React", "Java", "AWS", "UX/UI"]
   }
 ];
 ---
 
-<section id="estudios" class="py-20">
+<section id="estudios" class="py-20 bg-light-background dark:bg-dark-background relative overflow-hidden">
+  <!-- Elementos decorativos de fondo -->
+  <div class="absolute inset-0 -z-10 opacity-30">
+    <div class="absolute top-0 left-0 w-1/3 h-1/3 bg-gradient-to-br from-secondary-100/40 to-transparent dark:from-secondary-900/20 blur-3xl"></div>
+    <div class="absolute bottom-0 right-0 w-1/3 h-1/3 bg-gradient-to-tl from-primary-100/40 to-transparent dark:from-primary-900/20 blur-3xl"></div>
+  </div>
+
   <div class="container mx-auto px-4">
-    <div class="text-center max-w-3xl mx-auto mb-16">
-      <h2 class="text-3xl md:text-4xl font-heading font-bold mb-4">Formación Académica</h2>
-      <p class="text-lg text-neutral-600 dark:text-neutral-400">
-        Mi preparación académica y certificaciones.
+    <div 
+      class="text-center max-w-3xl mx-auto mb-16"
+      data-aos="fade-up"
+      data-aos-duration="800"
+    >
+      <h2 class="text-3xl md:text-4xl font-sans font-bold mb-4 relative inline-block">
+        Formación Académica
+        <span class="absolute -bottom-2 left-0 w-full h-1 bg-secondary-500/30 rounded"></span>
+      </h2>
+      <p class="text-lg text-neutral-600 dark:text-neutral-400 mt-6">
+        Mi preparación académica y certificaciones profesionales.
       </p>
     </div>
     
     <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
       {estudios.map((estudio, index) => (
-        <div class="bg-white dark:bg-neutral-800 rounded-xl p-6 shadow-md hover:shadow-lg transition-all transform hover:-translate-y-1 border border-neutral-200 dark:border-neutral-700 animate-fade-in" style={`animation-delay: ${index * 150}ms`}>
-          <div class="flex flex-col items-start mb-4 gap-4">
-            <div class="w-full h-48 bg-neutral-100 dark:bg-neutral-700 rounded-lg flex items-center justify-center mr-4 overflow-hidden">
-              <!-- Si tienes los logos, reemplaza el SVG por una imagen -->
-              <img src={estudio.logo} alt={estudio.titulo} class="text-primary-500" />
+        <div 
+          class="bg-white/90 backdrop-blur-sm dark:bg-dark-surface/90 rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border border-neutral-200/80 dark:border-neutral-700/80 flex flex-col h-full group"
+          data-aos="fade-up"
+          data-aos-duration="800"
+          data-aos-delay={index * 100}
+        >
+          <div class="relative">
+            <!-- Imagen de fondo institucional -->
+            <div class="w-full h-56 bg-gradient-to-br from-secondary-100 to-secondary-200 dark:from-secondary-900 dark:to-secondary-800 overflow-hidden">
+              <div class="absolute inset-0 bg-gradient-to-r from-secondary-400 to-primary-200 dark:from-secondary-400"></div>
+              <div class="flex items-center justify-center h-full p-6 relative z-10">
+                <img 
+                  src={estudio.logo} 
+                  alt={`Logo de ${estudio.institucion}`} 
+                  class="max-h-28 max-w-[80%] object-contain filter drop-shadow-md transition-transform duration-300 group-hover:scale-105" 
+                  loading="lazy"
+                />
+              </div>
             </div>
-            <div>
-              <h3 class="text-xl font-bold text-neutral-900 dark:text-neutral-100">{estudio.titulo}</h3>
-              <p class="text-primary-600 dark:text-primary-400">{estudio.institucion}</p>
+            
+            <!-- Periodo -->
+            <div class="absolute top-4 right-4">
+              <span class="bg-white/90 dark:bg-dark-surface/90 backdrop-blur-sm text-secondary-700 dark:text-secondary-300 text-xs font-medium px-3 py-1.5 rounded-full border border-secondary-200 dark:border-secondary-700 shadow-sm">
+                {estudio.periodo}
+              </span>
             </div>
           </div>
           
-          <p class="text-neutral-600 dark:text-neutral-300 mb-4 text-sm">{estudio.descripcion}</p>
-          
-          <div class="bg-neutral-100 dark:bg-neutral-700 rounded-full px-3 py-1 text-xs font-medium text-neutral-800 dark:text-neutral-200 inline-block">
-            {estudio.periodo}
+          <div class="p-6 flex-grow flex flex-col">
+            <h3 class="text-xl font-bold text-neutral-900 dark:text-neutral-100 mb-2 group-hover:text-secondary-600 dark:group-hover:text-secondary-400 transition-colors">
+              {estudio.titulo}
+            </h3>
+            
+            <p class="text-secondary-600 dark:text-secondary-400 mb-4 flex items-center text-sm">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+              </svg>
+              {estudio.institucion}
+            </p>
+            
+            <p class="text-neutral-600 dark:text-neutral-300 text-sm mb-6 leading-relaxed flex-grow">
+              {estudio.descripcion}
+            </p>
+            
+            <!-- Habilidades adquiridas -->
+            {estudio.skills && (
+              <div class="mt-auto">
+                <h4 class="text-xs font-bold uppercase text-neutral-500 dark:text-neutral-400 mb-2">Habilidades adquiridas</h4>
+                <div class="flex flex-wrap gap-2">
+                  {estudio.skills.map(skill => (
+                    <span class="text-xs py-1 px-2 bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 rounded-md">
+                      {skill}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
+          
+          <!-- Elemento decorativo inferior -->
+          <div class="h-1.5 bg-gradient-to-r from-secondary-400 to-primary-400 dark:from-secondary-600 dark:to-primary-600 transform origin-left transition-transform duration-300 scale-x-0 group-hover:scale-x-100"></div>
         </div>
       ))}
     </div>
   </div>
 </section>
+
+<style>
+/* Animación personalizada para las tarjetas al hacer hover */
+@keyframes cardPulse {
+  0% {
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  }
+  50% {
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  }
+  100% {
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  }
+}
+
+/* Aplicar animación a las tarjetas con clase 'card-animate' */
+.grid > div:hover {
+  animation: cardPulse 2s ease-in-out infinite;
+}
+</style>

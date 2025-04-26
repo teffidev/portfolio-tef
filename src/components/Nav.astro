@@ -8,7 +8,7 @@ import ThemeSwitcher from "./ThemeSwitcher.astro";
   data-aos-duration="800"
   data-aos-delay="100"
 >
-    <div class="container mx-auto px-4 py-4 flex items-center justify-between">
+    <div class="container mx-auto px-4 py-5 flex items-center justify-between">
         <div class="transition-transform duration-500 hover:scale-105">
             <a href="/" class="flex items-center gap-4 text-xl font-sans font-bold text-primary-600 dark:text-primary-400">
               <img 
@@ -139,23 +139,23 @@ import ThemeSwitcher from "./ThemeSwitcher.astro";
   document.addEventListener('astro:page-load', function() {
     const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
     const mobileMenu = document.getElementById('mobile-menu');
-    
+  
     mobileMenuToggle?.addEventListener('click', () => {
       mobileMenu?.classList.toggle('hidden');
-      
+    
       // Añadir con un pequeño retraso para permitir la transición
       setTimeout(() => {
-        mobileMenu?.classList.toggle('is-open');
-      }, 10);
+      mobileMenu?.classList.toggle('is-open');
+    }, 10);
     });
 
     // Cerrar el menú al hacer clic en un enlace
     const mobileLinks = mobileMenu?.querySelectorAll('a');
-    
+  
     mobileLinks?.forEach(link => {
       link.addEventListener('click', () => {
         mobileMenu?.classList.remove('is-open');
-        
+      
         // Ocultar después de que termine la transición
         setTimeout(() => {
           mobileMenu?.classList.add('hidden');
@@ -166,15 +166,17 @@ import ThemeSwitcher from "./ThemeSwitcher.astro";
     // Resaltar enlace activo basado en la sección actual
     const navLinks = document.querySelectorAll('.nav-link');
     const sections = document.querySelectorAll('section[id]');
-    
+  
     function highlightActiveLink() {
       const scrollY = window.scrollY;
-      
+    
       sections.forEach(section => {
-        const sectionTop = section.offsetTop - 100;
-        const sectionHeight = section.offsetHeight;
+        // Solución al error de tipos: convertir Element a HTMLElement
+        const htmlSection = section as HTMLElement;
+        const sectionTop = htmlSection.offsetTop - 100;
+        const sectionHeight = htmlSection.offsetHeight;
         const sectionId = section.getAttribute('id');
-        
+      
         if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
           navLinks.forEach(link => {
             if (link.getAttribute('href') === `#${sectionId}`) {
@@ -186,10 +188,10 @@ import ThemeSwitcher from "./ThemeSwitcher.astro";
         }
       });
     }
-    
+  
     window.addEventListener('scroll', highlightActiveLink);
-    
-    // También verificar al cargar la página
-    highlightActiveLink();
-  });
+  
+      // También verificar al cargar la página
+      highlightActiveLink();
+    });
 </script>
