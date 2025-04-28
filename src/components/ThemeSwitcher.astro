@@ -41,55 +41,39 @@
 </div>
 
 <script>
-  // Script para manejar el cambio de tema
-  function initThemeSwitcher() {
+  document.addEventListener('astro:page-load', () => {
+    // Eliminar cualquier event listener previo
     const themeToggle = document.getElementById('theme-toggle');
+    if (themeToggle) {
+      const newThemeToggle = themeToggle.cloneNode(true);
+      themeToggle.parentNode?.replaceChild(newThemeToggle, themeToggle);
+      
+      // Volver a añadir el event listener al nuevo elemento
+      newThemeToggle.addEventListener('click', () => {
+        // Asegurarse de que el navbar esté visible durante el cambio de tema
+        const header = document.getElementById('main-header');
+        if (header) {
+          header.classList.remove('-translate-y-full');
+        }
+        
+        // Cambiar el tema
+        const isDark = document.documentElement.classList.contains('dark');
+        document.documentElement.classList.toggle('dark', !isDark);
+        localStorage.setItem('theme', isDark ? 'light' : 'dark');
+        
+        // Notificar a otros componentes
+        window.dispatchEvent(new CustomEvent('theme-changed'));
+      });
+    }
     
-    // Función para establecer el tema
-    const setTheme = (theme: 'light' | 'dark') => {
-      document.documentElement.classList.toggle('dark', theme === 'dark');
-      localStorage.setItem('theme', theme);
-      
-      // Disparar evento personalizado para notificar el cambio de tema
-      const event = new CustomEvent('theme-change', { detail: { theme } });
-      document.dispatchEvent(event);
-    };
-  
-    // Detectar preferencia del sistema
-    const detectTheme = (): 'light' | 'dark' => {
-      // Verificar preferencia guardada
-      const savedTheme = localStorage.getItem('theme');
-      if (savedTheme === 'light' || savedTheme === 'dark') {
-        return savedTheme;
-      }
-      
-      // Si no hay preferencia guardada, usar la del sistema
-      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-    };
-  
-    // Inicializar tema
-    const currentTheme = detectTheme();
-    setTheme(currentTheme);
-  
-    // Escuchar cambios en las preferencias del sistema
-    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
-      const savedTheme = localStorage.getItem('theme');
-      if (!savedTheme || savedTheme === 'auto') {
-        setTheme(e.matches ? 'dark' : 'light');
-      }
-    });
-  
-    // Escuchar clics en el botón de cambio
-    themeToggle?.addEventListener('click', () => {
-      const currentTheme = document.documentElement.classList.contains('dark') ? 'dark' : 'light';
-      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-      setTheme(newTheme);
-    });
-  }
-
-  // Inicializar al cargar la página
-  document.addEventListener('DOMContentLoaded', initThemeSwitcher);
-  
-  // Reinicializar con View Transitions de Astro
-  document.addEventListener('astro:page-load', initThemeSwitcher);
+    // Aplicar tema según preferencia guardada
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const savedTheme = localStorage.getItem('theme');
+    
+    if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  });
 </script>

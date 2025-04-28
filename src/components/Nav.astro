@@ -136,116 +136,106 @@ import ThemeSwitcher from "./ThemeSwitcher.astro";
 </style>
 
 <script>
-  // Función para inicializar el comportamiento del menú y la navegación
-  function initNavigation() {
+  document.addEventListener('astro:page-load', () => {
     const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
     const mobileMenu = document.getElementById('mobile-menu');
     const header = document.getElementById('main-header');
-  
+    
+    // Bandera para el cambio de tema
+    let isChangingTheme = false;
+    
+    // Escuchar evento de cambio de tema
+    window.addEventListener('theme-changed', () => {
+      isChangingTheme = true;
+      setTimeout(() => { isChangingTheme = false; }, 500);
+    });
+    
     // Manejar el menú móvil
     mobileMenuToggle?.addEventListener('click', () => {
       mobileMenu?.classList.toggle('hidden');
-    
-      // Añadir con un pequeño retraso para permitir la transición
       setTimeout(() => {
         mobileMenu?.classList.toggle('is-open');
       }, 10);
     });
-
+    
     // Cerrar el menú al hacer clic en un enlace
     const mobileLinks = mobileMenu?.querySelectorAll('a');
-  
     mobileLinks?.forEach(link => {
       link.addEventListener('click', () => {
         mobileMenu?.classList.remove('is-open');
-      
-        // Ocultar después de que termine la transición
         setTimeout(() => {
           mobileMenu?.classList.add('hidden');
         }, 300);
       });
     });
-
-    // Controlar la visibilidad del header al hacer scroll
-    let lastScrollY = window.scrollY;
     
-    function onScroll() {
+    // Controlar la navbar al hacer scroll
+    let lastScrollY = window.scrollY;
+    window.addEventListener('scroll', () => {
+      // Si estamos cambiando el tema, no hacer nada
+      if (isChangingTheme) return;
+      
       const currentScrollY = window.scrollY;
       
-      // Si estamos arriba del todo, siempre mostrar el header
+      // Si estamos arriba del todo, siempre mostrar
       if (currentScrollY <= 0) {
-        header?.classList.remove('hidden');
         header?.classList.remove('-translate-y-full');
         return;
       }
       
-      // Si estamos scrolleando hacia abajo, ocultar el header
+      // Si scrolleamos hacia abajo, ocultar
       if (currentScrollY > lastScrollY && currentScrollY > 100) {
         header?.classList.add('-translate-y-full');
-      } else {
-        // Si estamos scrolleando hacia arriba, mostrar el header
+      } 
+      // Si scrolleamos hacia arriba, mostrar
+      else {
         header?.classList.remove('-translate-y-full');
       }
       
       lastScrollY = currentScrollY;
-    }
-
-    // Añadir listener para el scroll
-    window.addEventListener('scroll', onScroll, { passive: true });
-
-    // Resaltar enlace activo basado en la sección actual
-    const navLinks = document.querySelectorAll('.nav-link');
-    const sections = document.querySelectorAll('section[id]');
-  
-    function highlightActiveLink() {
-      const scrollY = window.scrollY;
-      
-      sections.forEach(section => {
-        const htmlSection = section as HTMLElement;
-        const sectionTop = htmlSection.offsetTop - 100;
-        const sectionHeight = htmlSection.offsetHeight;
-        const sectionId = section.getAttribute('id');
-      
-        if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
-          navLinks.forEach(link => {
-            if (link.getAttribute('href') === `#${sectionId}`) {
-              link.classList.add('text-primary-600', 'dark:text-primary-400');
-            } else {
-              link.classList.remove('text-primary-600', 'dark:text-primary-400');
-            }
-          });
-        }
-      });
-    }
-  
-    window.addEventListener('scroll', highlightActiveLink);
-  
-    // También verificar al cargar la página
-    highlightActiveLink();
+    });
     
-    // Fix para los enlaces de anclaje - prevenir cambio de tema al hacer scroll
+    // Fix para los enlaces de anclaje
     const anchorLinks = document.querySelectorAll('a[href^="#"]');
-    
     anchorLinks.forEach(link => {
       link.addEventListener('click', (e) => {
         e.preventDefault();
-        const target = document.querySelector(link.getAttribute('href') || '');
+        const targetId = link.getAttribute('href') || '';
+        const target = document.querySelector(targetId);
         if (target) {
-          // Scroll suave a la sección
-          target.scrollIntoView({
-            behavior: 'smooth'
-          });
-          
-          // Actualizar la URL sin recargar la página
-          history.pushState(null, '', link.getAttribute('href') || '');
+          target.scrollIntoView({ behavior: 'smooth' });
+          history.pushState(null, '', targetId);
         }
       });
     });
-  }
-
-  // Inicializar al cargar la página
-  document.addEventListener('DOMContentLoaded', initNavigation);
-  
-  // Reinicializar con View Transitions de Astro
-  document.addEventListener('astro:page-load', initNavigation);
+    
+    // Resaltar enlace activo
+    function highlightActiveLink() {
+      const scrollY = window.scrollY;
+      const navLinks = document.querySelectorAll('.nav-link');
+      const sections = document.querySelectorAll('section[id]');
+      
+      sections.forEach(section => {
+        // Fix para TypeScript - cast seguro
+        if (section instanceof HTMLElement) {
+          const sectionTop = section.offsetTop - 100;
+          const sectionHeight = section.offsetHeight;
+          const sectionId = section.getAttribute('id');
+          
+          if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
+            navLinks.forEach(link => {
+              if (link.getAttribute('href') === `#${sectionId}`) {
+                link.classList.add('text-primary-600', 'dark:text-primary-400');
+              } else {
+                link.classList.remove('text-primary-600', 'dark:text-primary-400');
+              }
+            });
+          }
+        }
+      });
+    }
+    
+    window.addEventListener('scroll', highlightActiveLink);
+    highlightActiveLink(); // Ejecutar al cargar
+  });
 </script>
