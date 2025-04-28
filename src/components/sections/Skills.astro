@@ -5,7 +5,21 @@ import SkillCard from "../SkillCard.astro";
 const skills = getSkills();
 ---
 
-<section id="skills" class="px-20 mx-auto">    
+<section id="skills" class="px-20 mx-auto">
+    <div 
+      class="text-center max-w-3xl mx-auto py-16"
+      data-aos="fade-up"
+      data-aos-duration="800"
+    >
+      <h2 class="text-3xl md:text-4xl font-sans font-bold mb-4 relative inline-block">
+        Habilidades técnicas
+        <span class="absolute -bottom-2 left-0 w-full h-1 bg-primary-500/30 rounded"></span>
+      </h2>
+      <p class="text-lg text-neutral-600 dark:text-neutral-400 mt-6">
+        Mis competencias, mis conocimientos y mis habilidades.
+      </p>
+    </div>
+    
     <!-- Swiper Container -->
     <div class="swiper skills-swiper" data-aos="fade-up" data-aos-delay="200">
       <div class="swiper-wrapper pb-12">
@@ -57,7 +71,7 @@ const skills = getSkills();
         },
         breakpoints: {
             320: {
-                slidesPerView: 2,
+                slidesPerView: 1,
                 spaceBetween: 20,
             },
             640: {

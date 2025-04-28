@@ -12,7 +12,7 @@ const { title, description = "Mi portafolio profesional" } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="es">
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -31,19 +31,51 @@ const { title, description = "Mi portafolio profesional" } = Astro.props;
 
 		<ClientRouter />
 
-		<!-- Script para el tema oscuro -->
+		<!-- Script para el tema oscuro - mejorado para evitar destellos -->
 		<script is:inline>
-			// Esto se ejecuta inmediatamente en el cliente
-			const savedTheme = localStorage.getItem('theme') || 'auto';
-			const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-			
-			// Aplicar tema oscuro si es necesario
-			if (savedTheme === 'dark' || (savedTheme === 'auto' && prefersDark)) {
-			  document.documentElement.classList.add('dark');
-			} else {
-			  document.documentElement.classList.remove('dark');
+			// Esta función evita destellos aplicando el tema inmediatamente
+			function applyTheme() {
+				// Verificar primero si hay un tema guardado durante la navegación
+				const navTheme = sessionStorage.getItem('currentTheme');
+				
+				// Si existe, usarlo y limpiarlo
+				if (navTheme) {
+					document.documentElement.classList.toggle('dark', navTheme === 'dark');
+					// Limpiar después de usar
+					sessionStorage.removeItem('currentTheme');
+					return;
+				}
+				
+				// Si no hay tema de navegación, usar la preferencia guardada
+				const savedTheme = localStorage.getItem('theme') || 'auto';
+				const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+				
+				// Aplicar tema oscuro si es necesario
+				if (savedTheme === 'dark' || (savedTheme === 'auto' && prefersDark)) {
+					document.documentElement.classList.add('dark');
+				} else {
+					document.documentElement.classList.remove('dark');
+				}
 			}
+			
+			// Aplicar el tema inmediatamente
+			applyTheme();
+			
+			// Agregar una clase para controlar las transiciones iniciales
+			document.documentElement.classList.add('theme-loaded');
 		</script>
+		
+		<style is:inline>
+			/* Prevenir destellos durante la carga inicial */
+			html:not(.theme-loaded) * {
+				transition: none !important;
+			}
+			
+			/* Transición suave para cambios de tema después de carga */
+			html.theme-loaded {
+				transition: background-color 0.3s ease;
+			}
+		</style>
 	</head>
 
 	<body class="font-sans bg-light-background text-light-text transition-colors duration-300 dark:bg-dark-background dark:text-dark-text">
@@ -64,43 +96,87 @@ const { title, description = "Mi portafolio profesional" } = Astro.props;
 		<script is:inline src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
 		<script is:inline>
 			// Inicializar AOS
-			document.addEventListener('DOMContentLoaded', function() {
+			function initAOS() {
 				AOS.init({
 					duration: 800,
 					easing: 'ease-out',
 					once: false,
 					mirror: true,
 					offset: 100,
-					delay: 0
+					delay: 0,
+					disable: window.innerWidth < 768 // Desactiva AOS en dispositivos móviles para mejor rendimiento
 				});
+			}
+			
+			// Inicializar cuando el DOM está listo
+			document.addEventListener('DOMContentLoaded', function() {
+				initAOS();
 			});
 			
 			// Para compatibilidad con View Transitions de Astro
 			document.addEventListener('astro:page-load', function() {
-				AOS.refresh();
+				initAOS();
+				
+				// Reiniciar AOS después de cierto tiempo para asegurar que funcione en todas las situaciones
+				setTimeout(() => {
+					AOS.refresh();
+				}, 100);
 			});
 			
 			// Para asegurarnos de que AOS se reinicia después de cambiar el tema
 			document.addEventListener('theme-change', function() {
 				setTimeout(() => AOS.refresh(), 300); // Esperar a que termine la transición del tema
 			});
-		</script>
-	
-		<script>
-			// Script para el menú móvil
-			const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
-			const mobileMenu = document.getElementById('mobile-menu');
 			
-			mobileMenuToggle?.addEventListener('click', () => {
-				mobileMenu?.classList.toggle('hidden');
+			// Refrescar AOS después de cualquier cambio de navegación
+			document.addEventListener('astro:after-swap', function() {
+				setTimeout(() => AOS.refresh(), 100);
 			});
-	
-		  	// Cerrar el menú al hacer clic en un enlace
-			const mobileLinks = mobileMenu?.querySelectorAll('a');
+		</script>
+		
+		<script>
+			// Manejar la transición entre páginas para prevenir destellos
+			document.addEventListener('astro:before-preparation', () => {
+				// Guardar el tema actual antes de la navegación
+				const isDarkMode = document.documentElement.classList.contains('dark');
+				sessionStorage.setItem('currentTheme', isDarkMode ? 'dark' : 'light');
+			});
 			
-			mobileLinks?.forEach(link => {
-				link.addEventListener('click', () => {
-					mobileMenu?.classList.add('hidden');
+			// Aplicar tema después de la navegación
+			document.addEventListener('astro:page-load', () => {
+				// Reaplica el tema después de la navegación
+				const navTheme = sessionStorage.getItem('currentTheme');
+				if (navTheme) {
+					document.documentElement.classList.toggle('dark', navTheme === 'dark');
+				} else {
+					// Si no hay tema guardado, usa la preferencia del usuario
+					const savedTheme = localStorage.getItem('theme') || 'auto';
+					const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+					
+					if (savedTheme === 'dark' || (savedTheme === 'auto' && prefersDark)) {
+						document.documentElement.classList.add('dark');
+					} else {
+						document.documentElement.classList.remove('dark');
+					}
+				}
+				
+				// Corregir enlaces internos
+				document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+					anchor.addEventListener('click', function(e) {
+						e.preventDefault();
+						const targetId = this.getAttribute('href');
+						const targetElement = document.querySelector(targetId);
+						
+						if (targetElement) {
+							// Scroll suave hasta el elemento
+							targetElement.scrollIntoView({
+								behavior: 'smooth'
+							});
+							
+							// Actualizar URL sin recargar la página
+							history.pushState(null, '', targetId);
+						}
+					});
 				});
 			});
 		</script>

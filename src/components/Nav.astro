@@ -3,6 +3,7 @@ import ThemeSwitcher from "./ThemeSwitcher.astro";
 ---
 
 <header 
+  id="main-header"
   class="sticky top-0 z-50 backdrop-blur-md bg-light-background/90 dark:bg-dark-background/90 border-b border-neutral-200 dark:border-neutral-800 transition-all duration-500"
   data-aos="fade-down"
   data-aos-duration="800"
@@ -66,7 +67,7 @@ import ThemeSwitcher from "./ThemeSwitcher.astro";
         <a href="#experiencia" class="block py-2 px-3 text-base font-medium hover:bg-neutral-100 dark:hover:bg-neutral-800 rounded-lg transition-colors">Experiencia</a>
         <a href="#estudios" class="block py-2 px-3 text-base font-medium hover:bg-neutral-100 dark:hover:bg-neutral-800 rounded-lg transition-colors">Estudios</a>
         <a href="#proyectos" class="block py-2 px-3 text-base font-medium hover:bg-neutral-100 dark:hover:bg-neutral-800 rounded-lg transition-colors">Proyectos</a>
-        <a href="/cv-estefania-bermudez.pdf" download class="block py-2 px-3 text-base font-medium text-white bg-primary-600 hover:bg-primary-700 rounded-lg transition-colors">
+        <a href="/cv-estefania-bermudez.pdf" target="_blank" class="block py-2 px-3 text-base font-medium text-white bg-primary-600 hover:bg-primary-700 rounded-lg transition-colors">
           Descargar CV
         </a>
       </div>
@@ -135,18 +136,20 @@ import ThemeSwitcher from "./ThemeSwitcher.astro";
 </style>
 
 <script>
-  // Script para el menú móvil
-  document.addEventListener('astro:page-load', function() {
+  // Función para inicializar el comportamiento del menú y la navegación
+  function initNavigation() {
     const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
     const mobileMenu = document.getElementById('mobile-menu');
+    const header = document.getElementById('main-header');
   
+    // Manejar el menú móvil
     mobileMenuToggle?.addEventListener('click', () => {
       mobileMenu?.classList.toggle('hidden');
     
       // Añadir con un pequeño retraso para permitir la transición
       setTimeout(() => {
-      mobileMenu?.classList.toggle('is-open');
-    }, 10);
+        mobileMenu?.classList.toggle('is-open');
+      }, 10);
     });
 
     // Cerrar el menú al hacer clic en un enlace
@@ -163,15 +166,41 @@ import ThemeSwitcher from "./ThemeSwitcher.astro";
       });
     });
 
+    // Controlar la visibilidad del header al hacer scroll
+    let lastScrollY = window.scrollY;
+    
+    function onScroll() {
+      const currentScrollY = window.scrollY;
+      
+      // Si estamos arriba del todo, siempre mostrar el header
+      if (currentScrollY <= 0) {
+        header?.classList.remove('hidden');
+        header?.classList.remove('-translate-y-full');
+        return;
+      }
+      
+      // Si estamos scrolleando hacia abajo, ocultar el header
+      if (currentScrollY > lastScrollY && currentScrollY > 100) {
+        header?.classList.add('-translate-y-full');
+      } else {
+        // Si estamos scrolleando hacia arriba, mostrar el header
+        header?.classList.remove('-translate-y-full');
+      }
+      
+      lastScrollY = currentScrollY;
+    }
+
+    // Añadir listener para el scroll
+    window.addEventListener('scroll', onScroll, { passive: true });
+
     // Resaltar enlace activo basado en la sección actual
     const navLinks = document.querySelectorAll('.nav-link');
     const sections = document.querySelectorAll('section[id]');
   
     function highlightActiveLink() {
       const scrollY = window.scrollY;
-    
+      
       sections.forEach(section => {
-        // Solución al error de tipos: convertir Element a HTMLElement
         const htmlSection = section as HTMLElement;
         const sectionTop = htmlSection.offsetTop - 100;
         const sectionHeight = htmlSection.offsetHeight;
@@ -191,7 +220,32 @@ import ThemeSwitcher from "./ThemeSwitcher.astro";
   
     window.addEventListener('scroll', highlightActiveLink);
   
-      // También verificar al cargar la página
-      highlightActiveLink();
+    // También verificar al cargar la página
+    highlightActiveLink();
+    
+    // Fix para los enlaces de anclaje - prevenir cambio de tema al hacer scroll
+    const anchorLinks = document.querySelectorAll('a[href^="#"]');
+    
+    anchorLinks.forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const target = document.querySelector(link.getAttribute('href') || '');
+        if (target) {
+          // Scroll suave a la sección
+          target.scrollIntoView({
+            behavior: 'smooth'
+          });
+          
+          // Actualizar la URL sin recargar la página
+          history.pushState(null, '', link.getAttribute('href') || '');
+        }
+      });
     });
+  }
+
+  // Inicializar al cargar la página
+  document.addEventListener('DOMContentLoaded', initNavigation);
+  
+  // Reinicializar con View Transitions de Astro
+  document.addEventListener('astro:page-load', initNavigation);
 </script>
