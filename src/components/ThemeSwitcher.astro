@@ -46,7 +46,7 @@
     const themeToggle = document.getElementById('theme-toggle');
     
     // Función para establecer el tema
-    const setTheme = (theme) => {
+    const setTheme = (theme: 'light' | 'dark') => {
       document.documentElement.classList.toggle('dark', theme === 'dark');
       localStorage.setItem('theme', theme);
       
@@ -56,7 +56,7 @@
     };
   
     // Detectar preferencia del sistema
-    const detectTheme = () => {
+    const detectTheme = (): 'light' | 'dark' => {
       // Verificar preferencia guardada
       const savedTheme = localStorage.getItem('theme');
       if (savedTheme === 'light' || savedTheme === 'dark') {

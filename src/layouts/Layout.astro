@@ -161,20 +161,26 @@ const { title, description = "Mi portafolio profesional" } = Astro.props;
 				}
 				
 				// Corregir enlaces internos
-				document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-					anchor.addEventListener('click', function(e) {
+				document.querySelectorAll('a[href^="#"]').forEach((anchor: Element) => {
+					anchor.addEventListener('click', (e: Event) => {
 						e.preventDefault();
-						const targetId = this.getAttribute('href');
-						const targetElement = document.querySelector(targetId);
 						
-						if (targetElement) {
-							// Scroll suave hasta el elemento
-							targetElement.scrollIntoView({
-								behavior: 'smooth'
-							});
+						// Usamos casting explícito y accedemos al href directamente
+						const element = anchor as HTMLAnchorElement;
+						const hrefAttr = element.getAttribute('href');
+						
+						if (hrefAttr) {
+							const targetElement = document.querySelector(hrefAttr);
 							
-							// Actualizar URL sin recargar la página
-							history.pushState(null, '', targetId);
+							if (targetElement) {
+								// Scroll suave hasta el elemento
+								targetElement.scrollIntoView({
+									behavior: 'smooth'
+								});
+								
+								// Actualizar URL sin recargar la página
+								history.pushState(null, '', hrefAttr);
+							}
 						}
 					});
 				});
