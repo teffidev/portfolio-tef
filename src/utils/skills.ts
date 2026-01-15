@@ -8,18 +8,17 @@ export interface Skill {
  */
 export function getSkills(): Skill[] {
   return [
+    // Bases Web
     {
       nombre: "HTML5",
       logo: "html5",
     },
     {
-      nombre: "Cypress",
-      logo: "cypress",
-    },
-    {
       nombre: "CSS3",
-      logo: "css3",
+      logo: "css",
     },
+
+    // Lenguajes
     {
       nombre: "JavaScript",
       logo: "javascript",
@@ -28,6 +27,8 @@ export function getSkills(): Skill[] {
       nombre: "TypeScript",
       logo: "typescript",
     },
+
+    // Frameworks / Librerías Frontend
     {
       nombre: "React",
       logo: "react",
@@ -40,22 +41,34 @@ export function getSkills(): Skill[] {
       nombre: "Astro",
       logo: "astro",
     },
+
+    // Estilos
     {
       nombre: "TailwindCSS",
       logo: "tailwindcss",
     },
+
+    // UI / Testing
     {
       nombre: "Storybook",
       logo: "storybook",
     },
     {
-      nombre: "Git",
-      logo: "git",
+      nombre: "Cypress",
+      logo: "cypress",
+    },
+
+    // Backend
+    {
+      nombre: "Express.js",
+      logo: "express",
     },
     {
-      nombre: "GitHub",
-      logo: "github",
+      nombre: "GraphQL",
+      logo: "graphql",
     },
+
+    // Bases de datos
     {
       nombre: "MySQL",
       logo: "mysql",
@@ -63,6 +76,16 @@ export function getSkills(): Skill[] {
     {
       nombre: "MongoDB",
       logo: "mongodb",
+    },
+
+    // Control de versiones
+    {
+      nombre: "Git",
+      logo: "git",
+    },
+    {
+      nombre: "GitHub",
+      logo: "github",
     },
   ];
 }
