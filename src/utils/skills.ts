@@ -27,11 +27,29 @@ export function getSkills(): Skill[] {
       nombre: "TypeScript",
       logo: "typescript",
     },
+    
+    // Runtime
+    {
+      nombre: "Node.js",
+      logo: "nodedotjs",
+    },
 
     // Frameworks / Librerías Frontend
     {
       nombre: "React",
       logo: "react",
+    },
+    {
+      nombre: "React Native",
+      logo: "react",
+    },
+    {
+      nombre: "Expo Go",
+      logo: "expo",
+    },
+    {
+      nombre: "Ionic",
+      logo: "ionic",
     },
     {
       nombre: "Next.js",
@@ -42,6 +60,12 @@ export function getSkills(): Skill[] {
       logo: "astro",
     },
 
+    // CMS
+    {
+      nombre: "WordPress",
+      logo: "wordpress",
+    },
+    
     // Estilos
     {
       nombre: "TailwindCSS",
@@ -49,6 +73,10 @@ export function getSkills(): Skill[] {
     },
 
     // UI / Testing
+    {
+      nombre: "Figma",
+      logo: "figma",
+    },
     {
       nombre: "Storybook",
       logo: "storybook",

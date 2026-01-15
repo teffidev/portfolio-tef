@@ -1,39 +1,72 @@
 ---
 const experiencias = [
   {
-    cargo: "Front End Developer",
-    empresa: "Medusa Lab AI",
-    periodo: "Julio 2024 - Marzo 2025",
-    descripcion: "Desarrollo de interfaces de usuario con AI y aplicaciones web y móviles utilizando React, Next.js, TypeScript y TailwindCSS. Implementación de arquitecturas escalables y buenas prácticas de código.",
-    tecnologias: ["React", "Next.js", "TypeScript", "TailwindCSS", "Node.js", "GraphQL"],
+    cargo: "Freelance Developer",
+    empresa: "Self-employed",
+    periodo: "May 2025 - Currently",
+    descripcion: "Design and development of web and mobile applications, covering the entire lifecycle, from requirements analysis and wireframe creation to the implementation of high-performance, user-centred UI/UX solutions. Experience in creating responsive web platforms, cross-platform mobile applications, and integrating REST and GraphQL APIs. Strong focus on performance optimization, accessibility, and scalable front-end architectures. Creating tests to find and document bugs, inconsistencies, and other defects to ensure that software meets high standards.",
     logros: [
-      "Reduje el tiempo de carga inicial de los compañeros en un 40% haciendo el código más eficiente y optimizando recursos.",
-      "Lideré y ejecute el diseño de la aplicación mobile para una empresa de USA, mejorando las métricas de UX en un 75%."
-    ]
+      "Designed and developed a mobile application for business logo creation, providing users with guided recommendations for color palettes, typography, and branding elements.",
+      "Led the UX design and development of a food delivery mobile application, from wireframing in Figma to implementation in React Native with real-time location-based features.",
+      "Developed custom WordPress landing pages from scratch, including multilingual support (Arabic and Spanish) and UX-focused designs using Elementor."
+    ],
+    tecnologias: ["HTML5", "CSS3", "JavaScript", "TypeScript", "React", "React Native", "Expo Go", "Next.js", "Astro", "WordPress", "TailwindCSS", "Figma", "Storybook", "Cypress", "Express.js", "GraphQL", "Node.js", "MySQL", "MongoDB", "Git", "GitHub"],
+  },
+  {
+    cargo: "Frontend Developer",
+    empresa: "Medusa Lab AI",
+    periodo: "July 2024 - March 2025",
+    descripcion: "Frontend development for multiple international clients, building scalable web and mobile applications using React, Next.js, TypeScript, and TailwindCSS. Contributed to the design and implementation of modular architectures, authentication flows, and data-driven dashboards. Worked closely with product and backend teams to deliver performant, user-centered solutions across admin platforms, mobile applications, and client-facing systems.",
+    logros: [
+      "Developed a full logistics management platform for an import and freight company, including an admin web application with authentication, shipment traceability (LCL, FCL, FTL, LTL), inventory management, and document handling.",
+      "Built a mobile application for transport operators, enabling real-time shipment updates through QR code scanning and live delivery tracking.",
+      "Implemented a client-facing web application that allowed customers to securely upload documents, track shipments, and manage delivery information.",
+      "Contributed to the development of a task management platform for a U.S.-based company, building separate web and mobile applications for administrators and field employees.",
+      "Improved application performance and code maintainability by applying front-end best practices and scalable UI architecture patterns.",
+      "Developed high-performance landing pages using Astro and React, focusing on SEO, responsiveness, and modern UI/UX principles."
+    ],
+    tecnologias: ["HTML5", "CSS3", "JavaScript", "TypeScript", "Node.js", "React", "Next.js", "Ionic", "TailwindCSS", "Astro", "GraphQL"],
   },
   {
     cargo: "Developer Trainee",
     empresa: "Byte4Bit",
-    periodo: "Marzo 2023 - Julio 2024",
-    descripcion: "Desarrollo de sitios web y aplicaciones frontend para clientes de diversos sectores. Mantenimiento y optimización de aplicaciones existentes. Automatización de pruebas para la aplicación principal.",
-    tecnologias: ["React", "Next.js", "TypeScript", "Storybook", "Cypress", "GraphQL"],
+    periodo: "March 2023 - July 2024",
+    descripcion: "Frontend development and maintenance of web applications for multiple clients, contributing to a large-scale CRM platform similar to Salesforce. Worked on the implementation of new features, performance improvements, and automated testing. Collaborated closely with backend and database teams, following agile planning and delivery processes, while rapidly learning modern frontend technologies and testing practices.",
     logros: [
-      "Automaticé el código de la aplicación principal, reduciendo el tiempo de pruebas en un 50%, con un enfoque integral que priorizó la accesibilidad además de la funcionalidad.",
-      "Apoye al equipo con la implementación de nuevas funcionalidades y mejoras en la aplicación principal, mejorando la experiencia del usuario y la satisfacción."
-    ]
+      "Developed key sections of a custom CRM platform similar to Salesforce, including a comprehensive purchasing module handling product acquisition, discounts, digital invoicing, and invoice downloads.",
+      "Worked closely with backend and database developers to implement end-to-end features and ensure correct data handling and business logic integration.",
+      "Implemented automated end-to-end testing using Cypress, reducing manual testing time by approximately 50% while improving application reliability and accessibility.",
+      "Contributed within agile planning cycles, meeting sprint goals and delivery timelines while continuously improving code quality.",
+      "Developed a web platform from scratch that enabled independent service providers to create profiles, manage content, and monetize their services through digital payments and downloadable assets."
+    ],
+    tecnologias: ["React", "Next.js", "TypeScript", "Storybook", "Cypress", "GraphQL"],
   },
 ];
 
 // Íconos para las tecnologías (usando la librería simple-icons para mantener consistencia)
 const techIcons: Record<string, string> = {
-  "React": "react",
-  "Next.js": "nextdotjs",
+  "HTML5": "html5",
+  "CSS3": "css",
+  "JavaScript": "javascript",
   "TypeScript": "typescript",
+  "React": "react",
+  "React Native": "react",
+  "Expo Go": "expo",
+  "Ionic": "ionic",
+  "Next.js": "nextdotjs",
+  "Astro": "astro",
+  "WordPress": "wordpress",
   "TailwindCSS": "tailwindcss",
-  "Node.js": "nodedotjs",
-  "GraphQL": "graphql",
+  "Figma": "figma",
   "Storybook": "storybook",
   "Cypress": "cypress",
+  "Express.js": "express",
+  "GraphQL": "graphql",
+  "Node.js": "nodedotjs",
+  "MySQL": "mysql",
+  "MongoDB": "mongodb",
+  "Git": "git",
+  "GitHub": "github",
 };
 ---
 
@@ -51,11 +84,11 @@ const techIcons: Record<string, string> = {
       data-aos-duration="800"
     >
       <h2 class="text-3xl md:text-4xl font-sans font-bold mb-4 relative inline-block">
-        Experiencia Profesional
+        Experience
         <span class="absolute -bottom-2 left-0 w-full h-1 bg-primary-500/30 rounded"></span>
       </h2>
       <p class="text-lg text-neutral-600 dark:text-neutral-400 mt-6">
-        Mi trayectoria profesional en el mundo del desarrollo web.
+        My professional career in the world of web and mobile development.
       </p>
     </div>
     
@@ -99,7 +132,7 @@ const techIcons: Record<string, string> = {
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
                       <path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
                     </svg>
-                    Logros destacados:
+                    Achievements
                   </h4>
                   <ul class="space-y-3 text-sm md:text-base text-neutral-700 dark:text-neutral-300">
                     {exp.logros.map(logro => (
