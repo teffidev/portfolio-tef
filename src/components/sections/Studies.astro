@@ -1,34 +1,56 @@
 ---
-// Define tus estudios aquí
-const estudios = [
+// Define tus studies aquí
+const studies = [
   {
-    titulo: "Tecnólogo(a) en Desarrollo de Aplicaciones",
-    institucion: "ITM - Instituto Tecnológico Metropolitano",
-    periodo: "2025 - Actualmente",
-    descripcion: "Formación tecnológica que brindará herramientas y competencias fundamentales para la industria del software.",
+    title: "Associate Degree in Application Development",
+    institution: "ITM - Metropolitan Technological Institute",
+    period: "2025 - Present",
+    description: "Technology-focused academic program providing core competencies in software development, including web and mobile application development, database fundamentals, and multimedia design, with a strong emphasis on practical skills aligned with industry needs.",
     logo: "/logo-ITM.png",
-    skills: ["Desarrollo Web", "Diseño Multimedia", "Videojuegos", "Bases de Datos", "Apps Móviles"]
+    skills: [
+      "Web Development",
+      "Mobile Applications",
+      "Multimedia Design",
+      "Database Fundamentals",
+      "Game Development"
+    ]
   },
   {
-    titulo: "Certificación Back End Developer",
-    institucion: "Digital House",
-    periodo: "Julio 2023 - Julio 2024",
-    descripcion: "Certificación especializada y enfocada en el desarrollo Back End, complementada con contenidos técnicos sobre patrones de diseño.",
+    title: "Backend Developer Certification",
+    institution: "Digital House",
+    period: "July 2023 - July 2024",
+    description: "Specialized backend development certification focused on building scalable applications using microservices architectures, cloud services, and secure systems, complemented by testing practices and design patterns.",
     logo: "/logo-DH.png",
-    skills: ["Java", "Spring Cloud", "Microservicios", "Testing", "Ciberseguridad", "AWS", "Fundamentos de Go"]
+    skills: [
+      "Java",
+      "Spring Cloud",
+      "Microservices",
+      "Software Testing",
+      "Cybersecurity",
+      "AWS",
+      "Go Fundamentals"
+    ]
   },
   {
-    titulo: "Certificación Professional Developer",
-    institucion: "Digital House",
-    periodo: "Octubre 2021 - Julio 2023",
-    descripcion: "Certificación enfocada en otorgar conocimiento en lenguajes de programación y herramientas de desarrollo, donde se experimenta el aprendizaje al mundo TI.",
+    title: "Professional Developer Certification",
+    institution: "Digital House",
+    period: "October 2021 - July 2023",
+    description: "Comprehensive developer certification focused on programming fundamentals, modern web technologies, and software development tools, providing a strong foundation for professional work in the IT industry.",
     logo: "/logo-DH.png",
-    skills: ["HTML/CSS", "JavaScript", "React", "Java", "AWS", "UX/UI"]
+    skills: [
+      "HTML & CSS",
+      "JavaScript",
+      "React",
+      "Java",
+      "AWS",
+      "UX/UI Principles"
+    ]
   }
 ];
+
 ---
 
-<section id="estudios" class="py-20 bg-light-background dark:bg-dark-background relative overflow-hidden">
+<section id="studies" class="py-20 bg-light-background dark:bg-dark-background relative overflow-hidden">
   <!-- Elementos decorativos de fondo -->
   <div class="absolute inset-0 -z-10 opacity-30">
     <div class="absolute top-0 left-0 w-1/3 h-1/3 bg-gradient-to-br from-secondary-100/40 to-transparent dark:from-secondary-900/20 blur-3xl"></div>
@@ -42,16 +64,16 @@ const estudios = [
       data-aos-duration="800"
     >
       <h2 class="text-3xl md:text-4xl font-sans font-bold mb-4 relative inline-block">
-        Formación Académica
+        Education
         <span class="absolute -bottom-2 left-0 w-full h-1 bg-secondary-500/30 rounded"></span>
       </h2>
       <p class="text-lg text-neutral-600 dark:text-neutral-400 mt-6">
-        Mi preparación académica y certificaciones profesionales.
+        Academic background and professional certifications.
       </p>
     </div>
     
     <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
-      {estudios.map((estudio, index) => (
+      {studies.map((estudio, index) => (
         <div 
           class="bg-white/90 backdrop-blur-sm dark:bg-dark-surface/90 rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border border-neutral-200/80 dark:border-neutral-700/80 flex flex-col h-full group"
           data-aos="fade-up"
@@ -59,47 +81,47 @@ const estudios = [
           data-aos-delay={index * 100}
         >
           <div class="relative">
-            <!-- Imagen de fondo institucional -->
+            <!-- Imagen de fondo institutional -->
             <div class="w-full h-56 bg-gradient-to-br from-secondary-100 to-secondary-200 dark:from-secondary-900 dark:to-secondary-800 overflow-hidden">
               <div class="absolute inset-0 bg-gradient-to-r from-secondary-400 to-primary-200 dark:from-secondary-400"></div>
               <div class="flex items-center justify-center h-full p-6 relative z-10">
                 <img 
                   src={estudio.logo} 
-                  alt={`Logo de ${estudio.institucion}`} 
+                  alt={`Logo de ${estudio.institution}`} 
                   class="max-h-28 max-w-[80%] object-contain filter drop-shadow-md transition-transform duration-300 group-hover:scale-105" 
                   loading="lazy"
                 />
               </div>
             </div>
             
-            <!-- Periodo -->
+            <!-- period -->
             <div class="absolute top-4 right-4">
               <span class="bg-white/90 dark:bg-dark-surface/90 backdrop-blur-sm text-secondary-700 dark:text-secondary-300 text-xs font-medium px-3 py-1.5 rounded-full border border-secondary-200 dark:border-secondary-700 shadow-sm">
-                {estudio.periodo}
+                {estudio.period}
               </span>
             </div>
           </div>
           
           <div class="p-6 flex-grow flex flex-col">
             <h3 class="text-xl font-bold text-neutral-900 dark:text-neutral-100 mb-2 group-hover:text-secondary-600 dark:group-hover:text-secondary-400 transition-colors">
-              {estudio.titulo}
+              {estudio.title}
             </h3>
             
             <p class="text-secondary-600 dark:text-secondary-400 mb-4 flex items-center text-sm">
               <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
               </svg>
-              {estudio.institucion}
+              {estudio.institution}
             </p>
             
             <p class="text-neutral-600 dark:text-neutral-300 text-sm mb-6 leading-relaxed flex-grow">
-              {estudio.descripcion}
+              {estudio.description}
             </p>
             
-            <!-- Habilidades adquiridas -->
+            <!-- Key Skills -->
             {estudio.skills && (
               <div class="mt-auto">
-                <h4 class="text-xs font-bold uppercase text-neutral-500 dark:text-neutral-400 mb-2">Habilidades adquiridas</h4>
+                <h4 class="text-xs font-bold uppercase text-neutral-500 dark:text-neutral-400 mb-2">Key Skills</h4>
                 <div class="flex flex-wrap gap-2">
                   {estudio.skills.map(skill => (
                     <span class="text-xs py-1 px-2 bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 rounded-md">

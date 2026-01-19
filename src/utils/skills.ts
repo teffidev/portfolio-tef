@@ -59,6 +59,10 @@ export function getSkills(): Skill[] {
       nombre: "Astro",
       logo: "astro",
     },
+    {
+      nombre: "Vite",
+      logo: "vite",
+    },
 
     // CMS
     {

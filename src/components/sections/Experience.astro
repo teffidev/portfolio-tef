@@ -4,19 +4,19 @@ const experiencias = [
     cargo: "Freelance Developer",
     empresa: "Self-employed",
     periodo: "May 2025 - Currently",
-    descripcion: "Design and development of web and mobile applications, covering the entire lifecycle, from requirements analysis and wireframe creation to the implementation of high-performance, user-centred UI/UX solutions. Experience in creating responsive web platforms, cross-platform mobile applications, and integrating REST and GraphQL APIs. Strong focus on performance optimization, accessibility, and scalable front-end architectures. Creating tests to find and document bugs, inconsistencies, and other defects to ensure that software meets high standards.",
+    description: "Design and development of web and mobile applications, covering the entire lifecycle, from requirements analysis and wireframe creation to the implementation of high-performance, user-centred UI/UX solutions. Experience in creating responsive web platforms, cross-platform mobile applications, and integrating REST and GraphQL APIs. Strong focus on performance optimization, accessibility, and scalable front-end architectures. Creating tests to find and document bugs, inconsistencies, and other defects to ensure that software meets high standards.",
     logros: [
       "Designed and developed a mobile application for business logo creation, providing users with guided recommendations for color palettes, typography, and branding elements.",
       "Led the UX design and development of a food delivery mobile application, from wireframing in Figma to implementation in React Native with real-time location-based features.",
       "Developed custom WordPress landing pages from scratch, including multilingual support (Arabic and Spanish) and UX-focused designs using Elementor."
     ],
-    tecnologias: ["HTML5", "CSS3", "JavaScript", "TypeScript", "React", "React Native", "Expo Go", "Next.js", "Astro", "WordPress", "TailwindCSS", "Figma", "Storybook", "Cypress", "Express.js", "GraphQL", "Node.js", "MySQL", "MongoDB", "Git", "GitHub"],
+    technologies: ["HTML5", "CSS3", "JavaScript", "TypeScript", "React", "React Native", "Expo Go", "Next.js", "Astro", "WordPress", "TailwindCSS", "Figma", "Storybook", "Cypress", "Express.js", "GraphQL", "Node.js", "MySQL", "MongoDB", "Git", "GitHub"],
   },
   {
     cargo: "Frontend Developer",
     empresa: "Medusa Lab AI",
     periodo: "July 2024 - March 2025",
-    descripcion: "Frontend development for multiple international clients, building scalable web and mobile applications using React, Next.js, TypeScript, and TailwindCSS. Contributed to the design and implementation of modular architectures, authentication flows, and data-driven dashboards. Worked closely with product and backend teams to deliver performant, user-centered solutions across admin platforms, mobile applications, and client-facing systems.",
+    description: "Frontend development for multiple international clients, building scalable web and mobile applications using React, Next.js, TypeScript, and TailwindCSS. Contributed to the design and implementation of modular architectures, authentication flows, and data-driven dashboards. Worked closely with product and backend teams to deliver performant, user-centered solutions across admin platforms, mobile applications, and client-facing systems.",
     logros: [
       "Developed a full logistics management platform for an import and freight company, including an admin web application with authentication, shipment traceability (LCL, FCL, FTL, LTL), inventory management, and document handling.",
       "Built a mobile application for transport operators, enabling real-time shipment updates through QR code scanning and live delivery tracking.",
@@ -25,13 +25,13 @@ const experiencias = [
       "Improved application performance and code maintainability by applying front-end best practices and scalable UI architecture patterns.",
       "Developed high-performance landing pages using Astro and React, focusing on SEO, responsiveness, and modern UI/UX principles."
     ],
-    tecnologias: ["HTML5", "CSS3", "JavaScript", "TypeScript", "Node.js", "React", "Next.js", "Ionic", "TailwindCSS", "Astro", "GraphQL"],
+    technologies: ["HTML5", "CSS3", "JavaScript", "TypeScript", "Node.js", "React", "Next.js", "Ionic", "TailwindCSS", "Astro", "GraphQL"],
   },
   {
     cargo: "Developer Trainee",
     empresa: "Byte4Bit",
     periodo: "March 2023 - July 2024",
-    descripcion: "Frontend development and maintenance of web applications for multiple clients, contributing to a large-scale CRM platform similar to Salesforce. Worked on the implementation of new features, performance improvements, and automated testing. Collaborated closely with backend and database teams, following agile planning and delivery processes, while rapidly learning modern frontend technologies and testing practices.",
+    description: "Frontend development and maintenance of web applications for multiple clients, contributing to a large-scale CRM platform similar to Salesforce. Worked on the implementation of new features, performance improvements, and automated testing. Collaborated closely with backend and database teams, following agile planning and delivery processes, while rapidly learning modern frontend technologiesnologies and testing practices.",
     logros: [
       "Developed key sections of a custom CRM platform similar to Salesforce, including a comprehensive purchasing module handling product acquisition, discounts, digital invoicing, and invoice downloads.",
       "Worked closely with backend and database developers to implement end-to-end features and ensure correct data handling and business logic integration.",
@@ -39,12 +39,12 @@ const experiencias = [
       "Contributed within agile planning cycles, meeting sprint goals and delivery timelines while continuously improving code quality.",
       "Developed a web platform from scratch that enabled independent service providers to create profiles, manage content, and monetize their services through digital payments and downloadable assets."
     ],
-    tecnologias: ["React", "Next.js", "TypeScript", "Storybook", "Cypress", "GraphQL"],
+    technologies: ["React", "Next.js", "TypeScript", "Storybook", "Cypress", "GraphQL"],
   },
 ];
 
 // Íconos para las tecnologías (usando la librería simple-icons para mantener consistencia)
-const techIcons: Record<string, string> = {
+const technologiesIcons: Record<string, string> = {
   "HTML5": "html5",
   "CSS3": "css",
   "JavaScript": "javascript",
@@ -123,7 +123,7 @@ const techIcons: Record<string, string> = {
                 </span>
               </div>
               
-              <p class="text-neutral-700 dark:text-neutral-300 mb-6 leading-relaxed">{exp.descripcion}</p>
+              <p class="text-neutral-700 dark:text-neutral-300 mb-6 leading-relaxed">{exp.description}</p>
               
               <!-- Logros -->
               {exp.logros && exp.logros.length > 0 && (
@@ -149,21 +149,21 @@ const techIcons: Record<string, string> = {
               
               <!-- Tecnologías -->
               <div class="flex flex-wrap gap-2 mt-6">
-                {exp.tecnologias.map(tech => {
+                {exp.technologies.map(technologies => {
                   // Comprobamos si existe el icono antes de usarlo
-                  const hasIcon = Object.prototype.hasOwnProperty.call(techIcons, tech);
-                  const iconName = hasIcon ? techIcons[tech] : tech.toLowerCase();
+                  const hasIcon = Object.prototype.hasOwnProperty.call(technologiesIcons, technologies);
+                  const iconName = hasIcon ? technologiesIcons[technologies] : technologies.toLowerCase();
                   
                   return (
                     <span class="px-3 py-1.5 text-xs font-medium bg-neutral-100 dark:bg-neutral-800 text-neutral-800 dark:text-neutral-200 rounded-full flex items-center group-hover:bg-white dark:group-hover:bg-neutral-700 transition-colors shadow-sm">
                       {hasIcon && (
                         <img 
                           src={`https://cdn.simpleicons.org/${iconName}`} 
-                          alt={`${tech} icon`}
+                          alt={`${technologies} icon`}
                           class="w-3.5 h-3.5 mr-1.5" 
                         />
                       )}
-                      {tech}
+                      {technologies}
                     </span>
                   )
                 })}
