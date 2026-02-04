@@ -1,4 +1,7 @@
 ---
+import { Image } from 'astro:assets'
+import logoDH from '../../assets/logo-DH.png'
+import logoITM from '../../assets/logo-ITM.png'
 // Define tus studies aquí
 const studies = [
   {
@@ -6,7 +9,7 @@ const studies = [
     institution: "ITM - Metropolitan Technological Institute",
     period: "2025 - Present",
     description: "Technology-focused academic program providing core competencies in software development, including web and mobile application development, database fundamentals, and multimedia design, with a strong emphasis on practical skills aligned with industry needs.",
-    logo: "/logo-ITM.png",
+    logo: logoITM,
     skills: [
       "Web Development",
       "Mobile Applications",
@@ -20,7 +23,7 @@ const studies = [
     institution: "Digital House",
     period: "July 2023 - July 2024",
     description: "Specialized backend development certification focused on building scalable applications using microservices architectures, cloud services, and secure systems, complemented by testing practices and design patterns.",
-    logo: "/logo-DH.png",
+    logo: logoDH,
     skills: [
       "Java",
       "Spring Cloud",
@@ -36,7 +39,7 @@ const studies = [
     institution: "Digital House",
     period: "October 2021 - July 2023",
     description: "Comprehensive developer certification focused on programming fundamentals, modern web technologies, and software development tools, providing a strong foundation for professional work in the IT industry.",
-    logo: "/logo-DH.png",
+    logo: logoDH,
     skills: [
       "HTML & CSS",
       "JavaScript",
@@ -81,11 +84,11 @@ const studies = [
           data-aos-delay={index * 100}
         >
           <div class="relative">
-            <!-- Imagen de fondo institutional -->
+            {/* Imagen de fondo institutional */}
             <div class="w-full h-56 bg-gradient-to-br from-secondary-100 to-secondary-200 dark:from-secondary-900 dark:to-secondary-800 overflow-hidden">
               <div class="absolute inset-0 bg-gradient-to-r from-secondary-400 to-primary-200 dark:from-secondary-400"></div>
               <div class="flex items-center justify-center h-full p-6 relative z-10">
-                <img 
+                <Image 
                   src={estudio.logo} 
                   alt={`Logo de ${estudio.institution}`} 
                   class="max-h-28 max-w-[80%] object-contain filter drop-shadow-md transition-transform duration-300 group-hover:scale-105" 
@@ -94,7 +97,7 @@ const studies = [
               </div>
             </div>
             
-            <!-- period -->
+            {/* period */}
             <div class="absolute top-4 right-4">
               <span class="bg-white/90 dark:bg-dark-surface/90 backdrop-blur-sm text-secondary-700 dark:text-secondary-300 text-xs font-medium px-3 py-1.5 rounded-full border border-secondary-200 dark:border-secondary-700 shadow-sm">
                 {estudio.period}
@@ -118,7 +121,7 @@ const studies = [
               {estudio.description}
             </p>
             
-            <!-- Key Skills -->
+            {/* Key Skills */}
             {estudio.skills && (
               <div class="mt-auto">
                 <h4 class="text-xs font-bold uppercase text-neutral-500 dark:text-neutral-400 mb-2">Key Skills</h4>
@@ -133,7 +136,7 @@ const studies = [
             )}
           </div>
           
-          <!-- Elemento decorativo inferior -->
+          {/* Elemento decorativo inferior */}
           <div class="h-1.5 bg-gradient-to-r from-secondary-400 to-primary-400 dark:from-secondary-600 dark:to-primary-600 transform origin-left transition-transform duration-300 scale-x-0 group-hover:scale-x-100"></div>
         </div>
       ))}
